@@ -1,6 +1,7 @@
 <script setup>
 import MenuIcon from 'vue-material-design-icons/Menu.vue'/*9行目で使用*/
 import AddCircleIcon from 'vue-material-design-icons/PlusCircleOutline.vue' /*11行目で使用*/
+import Task from './Task.vue'
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import AddCircleIcon from 'vue-material-design-icons/PlusCircleOutline.vue' /*11
         />
       </div>
       <div class="task_field"></div>
+       <Task />
     </div>
 </template>
 
