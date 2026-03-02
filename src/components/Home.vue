@@ -2,8 +2,15 @@
 </script>
 
 <template>
-  <h2>Hello World</h2>
+  <div class="main">
+
+  </div>
 </template>
 
-<style scoped>
+<style scoped>/*scoped:このコンポーネント内にのみ反映*/
+.main {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f8f9;
+}
 </style>
