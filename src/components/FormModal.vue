@@ -1,9 +1,19 @@
 <script setup>
+import { computed } from 'vue'
+import GenreBody from './GenreBody.vue';
+
+const props = defineProps({
+  body: String
+})
+
+const component = computed(() => {
+  return props.body === 'taskBody' ? null : GenreBody
+})
 </script>
 
 <template>
   <Modal v-model="showModal">
-    <p>モーダルの中身</p>
+    <component :is="component" />
   </Modal>
 </template>
 
