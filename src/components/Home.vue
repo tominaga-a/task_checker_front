@@ -15,7 +15,15 @@ onMounted(async()=> {
  }catch(error){
   console.log(error)
 }
-})
+
+
+ try {
+    const AllGenres = await api.get('/genres')
+    console.log(AllGenres)
+  }catch(error){
+    console.log(error)
+  }
+  })
 </script>
 
 
