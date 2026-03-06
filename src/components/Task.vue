@@ -6,7 +6,6 @@ const props = defineProps({
 })
 
 const formattedDeadlineDate = computed(() => {
-  // propsで受け取ったtask.deadlineDateをDateオブジェクトに変換する
   const date = new Date(props.task.deadlineDate)
 
   // 変換した Date オブジェクトを、日本の日付形式に変換する
@@ -27,16 +26,16 @@ const taskStyle = computed(() => {
       <span class="task_date">{{ formattedDeadlineDate }}</span> 
       <div class="task_text_contents">                                     
         <h3 class="task_title">{{ task.name }}</h3>                   
-        <p class="task_sentence">{{ task.explanation}}</p>   
-      </div>
-      <div class="image-container">
+        <p class="task_sentence">{{ task.explanation}}</p>  
+        <div v-if="task.image_url" class="image-container">
           <div class="image-wrapper">
             <img
-              :src="'https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg'"
+              :src="task.image_url"
               class="task-image"
-            />
+             />
           </div>
-      </div>      
+        </div>   
+      </div>   
       <div class="task_input_contents">
         <Select />
       </div>
