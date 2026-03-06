@@ -25,5 +25,28 @@ export const useTaskStore = defineStore('task', () => {
       filteredTasks.value = tasks.value.filter(task => numericGenreId === task.genreId)
     }
   }
-  return { tasks, filteredTasks, fetchAllTasks,filterTasks }
+  async function addTask(newTask) {
+    try{
+      const formData = new FormData();
+      formData.append('name', newTask.name);
+      formData.append('explanation', newTask.explanation);
+      formData.append('deadlineDate', newTask.deadlineDate);
+      formData.append('status', newTask.status);
+      formData.append('genreId', newTask.genreId);
+      formData.append('image_url', newTask.image_url);
+
+      const response = await api.post('/tasks', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      const addedTask = response.data;
+      tasks.value.push(addedTask);
+    }catch(error){
+      console.log('タスクデータの保存ができませんでした', error);
+    }
+  }
+
+ return { tasks, filteredTasks, fetchAllTasks, filterTasks, addTask }
+
 })

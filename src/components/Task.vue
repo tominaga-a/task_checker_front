@@ -18,10 +18,12 @@ const taskStyle = computed(() => {
     backgroundColor: isDeadlineAfterToday ? 'white' : 'rgb(250, 194, 194)',
   };
 })
+
+
 </script>
 
 <template>
-   <div class="task">
+    <div class="task" :style="taskStyle"> 
       <span class="task_date">{{ formattedDeadlineDate }}</span> 
       <div class="task_text_contents">                                     
         <h3 class="task_title">{{ task.name }}</h3>                   
