@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import GenreBody from './GenreBody.vue';
 import TaskBody from './TaskBody.vue';
-
 const props = defineProps({/*defineProps：script専用API*/
   body: String /*親からbodyというpropsを受け取る*/
 })
@@ -11,7 +10,7 @@ const component = computed(() => { /*componentは新しく作っている変数�
   return props.body === 'taskBody' ? TaskBody : GenreBody
 })/*props.bodyの値に応じて表示するｺﾝﾎﾟｰﾈﾝﾄを選んで返す”計算プロパティ”*/
 /*taskBodyならTaskBody、それ以外ならGenreBodyｺﾝﾎﾟｰﾈﾝﾄを返す*/
-/*↑というconputedの作業をcomponentに入れ込んでいる*/
+/*↑というconputedの作業をcomponentに入れ込んでる*/
 </script>
 
 <template>

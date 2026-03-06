@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@kouts/vue-modal": "^5.0.3",
+    "axios": "^1.13.6",
+    "pinia": "^3.0.4",
     "vue": "^3.5.29",
     "vue-material-design-icons": "^5.3.1"
   },
