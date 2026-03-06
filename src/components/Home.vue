@@ -17,15 +17,19 @@ onMounted(async()=> {
      await taskStore.fetchAllTasks();
   }catch(error){
   console.log(error)
-}
-
-
- try {
-   await genreStore.fetchAllGenres();
+  }
+  try {
+     await genreStore.fetchAllGenres();
   }catch(error){
-    console.log(error)
+  console.log(error)
   }
   })
+
+  
+const changeSelectedGenreId = (e) => {
+const selectGenreId = e.target.value;
+}
+
 </script>
 
 
@@ -33,7 +37,8 @@ onMounted(async()=> {
   <div class="main">
   <Header />
   <div class="genre">
-    <Select />
+    <Select @change="changeSelectedGenreId"/>
+  
     <AddCircleIcon class="add-circle-outline_icon" @click="showModal = true"/>
     <FormModal v-model="showModal" body="genreBody"/>
   </div>

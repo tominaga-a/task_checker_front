@@ -4,6 +4,7 @@ import { ref } from 'vue'
 
 export const useTaskStore = defineStore('task', () => {
   const tasks = ref([]);
+  const filteredTasks = ref([]); /*この変数にフィルタリングしたデータを保存していく*/
 
   async function fetchAllTasks () {
     try{
@@ -14,4 +15,15 @@ export const useTaskStore = defineStore('task', () => {
     }
   }
   return { tasks, fetchAllTasks }
+
+ async function filterTasks(genreId) {
+   const numericGenreId = Number(genreId);
+/*genreIdは引数。Taskモデル（schema参照）*/
+   if(numericGenreId === 0) {
+      filteredTasks.value = [...tasks.value];
+    } else {
+      filteredTasks.value = tasks.value.filter(task => numericGenreId === task.genreId)
+    }
+  }
+  return { tasks, filteredTasks, fetchAllTasks,filterTasks }
 })

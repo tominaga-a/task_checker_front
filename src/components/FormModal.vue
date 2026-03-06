@@ -5,7 +5,7 @@ import TaskBody from './TaskBody.vue';
 
 const props = defineProps({
   body: String, 
-  modelValue: Boolean,
+ 
 })
 
 const showModal = computed(() => props.modelValue);
