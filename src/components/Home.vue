@@ -1,5 +1,5 @@
 <script setup>
-import Header from './Header.vue'
+import Header from './Header.vue'/*Headerの親のため*/
 import Select from './Select.vue'
 import ToDoList from './ToDoList.vue'
 import AddCircleIcon from 'vue-material-design-icons/PlusCircleOutline.vue'
