@@ -4,22 +4,62 @@ import Select from './Select.vue'
 import ToDoList from './ToDoList.vue'
 import AddCircleIcon from 'vue-material-design-icons/PlusCircleOutline.vue'
 import FormModal from './FormModal.vue';
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useTaskStore } from '../stores/TaskStore'
+import { useGenreStore } from '../stores/GenreStore' 
+
 const showModal = ref(false);
+const taskStore = useTaskStore();
+const genreStore = useGenreStore();
+
+onMounted(async()=> {
+  try{
+     await taskStore.fetchAllTasks();
+  }catch(error){
+  console.log(error)
+  }
+  try {
+     await genreStore.fetchAllGenres();
+  }catch(error){
+  console.log(error)
+  }
+  })
+
+  
+const changeSelectedGenreId = (e) => {
+const selectGenreId = e.target.value;
+}
+
+const taskStatusElements = [
+    "ToDo",
+    "Pending",
+    "Doing(ToDay)",
+    "WIP",
+    "Check",
+    "Done",
+  ]
+
+  const filterTasksByStatus = (statusIndex) => {
+  const index = statusIndex
+  return taskStore.filteredTasks.filter(task => task.status == index);
+}
 </script>
 
 
 <template>
   <div class="main">
-  <Header />
-  <div class="genre">
-    <Select />
-    <AddCircleIcon class="add-circle-outline_icon" @click="showModal = true"/>
-    <FormModal v-model="showModal" body="genreBody"/>
-  </div>
-  <div class="contents">
-    <ToDoList />
-  </div>
+   <Header />
+   <div class="genre">
+     <Select @change="changeSelectedGenreId"/>
+  
+     <AddCircleIcon class="add-circle-outline_icon" @click="showModal = true"/>
+     <FormModal v-model="showModal" body="genreBody"/>
+   </div>
+   <div class="contents">
+      <div v-for="(status, index) in taskStatusElements" :key="index">
+        <ToDoList :tasks="filterTasksByStatus(index)" :key="index" :status="status"/>
+      </div>
+   </div>
   </div>
 </template>
 

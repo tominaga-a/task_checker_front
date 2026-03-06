@@ -4,18 +4,26 @@ import GenreBody from './GenreBody.vue';
 import TaskBody from './TaskBody.vue';
 
 const props = defineProps({
-  body: String
+  body: String, 
+ 
 })
+
+const showModal = computed(() => props.modelValue);
 
 const component = computed(() => {
   return props.body === 'taskBody' ? TaskBody : GenreBody
 })
+
+
+
 </script>
 
 <template>
+    <dialog v-if="showModal">
   <Modal v-model="showModal">
     <component :is="component" />
   </Modal>
+  </dialog>
 </template>
 
 <style>
