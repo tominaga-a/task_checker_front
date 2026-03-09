@@ -3,15 +3,28 @@ import { auth, signInWithEmailAndPassword } from '../firebase';
 import Header from './Header.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'; 
+const router = useRouter();
+const email = ref('');
+const password = ref('');
+
+const handleSignIn = async() => {
+  try{
+    await signInWithEmailAndPassword(auth, email.value, password.value)
+    router.push("/home")
+  }catch(error){
+    console.log('ログインに失敗しました')
+  }
+}
+
 </script>
 
 <template>
   <Header />
   <div class="form-body">
     <h1>ログイン</h1>
-    <input type="text" id="email" placeholder="email">
-    <input type="password" id="password" placeholder="password">
-    <button value="ログイン" >ログイン</button>
+    <input type="text" v-model="email" id="email" placeholder="email">
+    <input type="password" id="password" v-model="password" placeholder="password">
+    <button value="ログイン"  @click="handleSignIn">ログイン</button>
     <p>アカウント作成がお済みでない場合は<router-link to="/signup">こちら</router-link></p>
   </div>
 </template>
