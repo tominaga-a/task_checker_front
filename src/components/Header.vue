@@ -1,9 +1,11 @@
 <script setup>
 import CheckAll from 'vue-material-design-icons/CheckAll.vue';
 /*Material Design Iconsのライブラリ読み込み CheckALLという名前でインポート*/
-import { auth, signOut } from '../firebase';
+import { auth, signOut,onAuthStateChange } from '../firebase';
 import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
 const router = useRouter();
+const currentUser = ref(null);
 const handleSignOut = async() => {
   try{
     await signOut(auth)
@@ -12,6 +14,17 @@ const handleSignOut = async() => {
     console.log('ログアウトに失敗しました')
   }
 }
+
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    // ユーザーがログイン中の場合はcurrentUserの値を更新する
+    if(user) {
+      currentUser.value = auth.currentUser;
+    }else{
+      currentUser.value = null;
+    }
+  })
+})
 </script>
 
 <template>
@@ -20,7 +33,7 @@ const handleSignOut = async() => {
       <CheckAll class="header_icon" fontsize="large" />
       <span class="header-title">Task Checker</span>
     </div>
-    <div class="header-search">
+    <div class="header-search" v-if="currentUser">
       <form class="search-container">
         <input
           placeholder="タイトルで検索"
@@ -37,7 +50,7 @@ const handleSignOut = async() => {
       </form>
     </div>
     <div class="header-right">
-      <button @click="handleSignOut" class="logout-button">
+      <button @click="handleSignOut" v-if="currentUser" class="logout-button">
         ログアウト
       </button>
     </div>
