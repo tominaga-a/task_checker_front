@@ -11,11 +11,17 @@ const component = computed(() => { /*componentは新しく作っている変数�
 })/*props.bodyの値に応じて表示するｺﾝﾎﾟｰﾈﾝﾄを選んで返す”計算プロパティ”*/
 /*taskBodyならTaskBody、それ以外ならGenreBodyｺﾝﾎﾟｰﾈﾝﾄを返す*/
 /*↑というconputedの作業をcomponentに入れ込んでる*/
+
+const emit = defineEmits(['close-modal'])
+const closeModal = () => {
+  emit('close-modal')
+}
+
 </script>
 
 <template>
   <Modal v-model="showModal">
-    <component :is="component" />/*""内のcomponentはcomputedの計算式が入った変数のこと*/
+     <component :is="component" @close-modal="closeModal" />
   </Modal>
 </template>
 
