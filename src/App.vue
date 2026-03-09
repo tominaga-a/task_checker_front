@@ -5,6 +5,7 @@ import Home from './components/Home.vue'
 
 <template>
   <Home />
+  <router-view />
 </template>
 
 <style scoped>
