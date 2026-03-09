@@ -1,7 +1,7 @@
 <script setup>
 import CheckAll from 'vue-material-design-icons/CheckAll.vue';
 /*Material Design Iconsのライブラリ読み込み CheckALLという名前でインポート*/
-import { auth, signOut,onAuthStateChange } from '../firebase';
+import { auth, signOut,onAuthStateChanged } from '../firebase';
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
 const router = useRouter();
